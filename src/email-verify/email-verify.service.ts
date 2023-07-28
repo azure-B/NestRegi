@@ -1,13 +1,9 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { ConflictException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EmailVerifyService {
-  constructor(
-    private readonly mailer: MailerService,
-    private readonly config: ConfigService,
-  ) {}
+  constructor(private readonly mailer: MailerService) {}
 
   async sendHello() {
     await this.mailer
