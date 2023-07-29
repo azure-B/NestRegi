@@ -1,13 +1,16 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('verify')
-export class verify {
+@Entity('users')
+export class users {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 65, nullable: false })
   userId: string;
 
-  @Column({ length: 7, nullable: false })
-  key: number;
+  @Column({ type: 'text', nullable: false })
+  userPw: string;
+
+  @Column({ length: 15, nullable: false })
+  userNickname: string;
 }
