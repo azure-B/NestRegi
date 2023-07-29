@@ -5,7 +5,7 @@ import { verify } from 'src/email-verify/entitiy/email-verify.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class dbcontrollService {
+export class verifyDBService {
   constructor(
     @InjectRepository(verify)
     private readonly Repo: Repository<verify>,

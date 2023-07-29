@@ -2,24 +2,31 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { verfiyDTO } from './dto/email-verify.dto';
-import { dbcontrollService } from 'src/dbcontroll/dbcontroll.service';
+import { verifyDBService } from 'src/dbcontroll/dbcontroll.service';
 
 @Injectable()
 export class emailVerifyService {
   constructor(
-    private readonly DB: dbcontrollService,
+    private readonly DB: verifyDBService,
     private readonly mailer: MailerService,
     private readonly config: ConfigService,
   ) {}
 
-  async sendHello(userId: string) {
-    const key = Math.floor(Math.random() * (999999 - 100000) + 100000);
+  async saveKey(data: verfiyDTO) {
+    const findone = await this.DB.findOne(data.userId);
+    if (findone) {
+      this.DB.update(data);
+    } else {
+      this.DB.create(data);
+    }
+  }
 
+  async sendKey(userId: string) {
+    const key = Math.floor(Math.random() * (999999 - 100000) + 100000);
     const Save = {
       key,
       userId,
     };
-
     await this.mailer
       .sendMail({
         to: `${userId}`, // List of receivers userId address
@@ -36,12 +43,13 @@ export class emailVerifyService {
       });
   }
 
-  async saveKey(data: verfiyDTO) {
-    const findone = await this.DB.findOne(data.userId);
-    if (findone) {
-      this.DB.update(data);
+  async verifyKey(data: verfiyDTO) {
+    const findData = await this.DB.findOne(data.userId);
+
+    if (findData.key === data.key) {
+      return `true`;
     } else {
-      this.DB.create(data);
+      return `false`;
     }
   }
 }
