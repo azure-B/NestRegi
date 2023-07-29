@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { EmailVerifyModule } from './email-verify/email-verify.module';
+import { emailVerifyModule } from './email-verify/email-verify.module';
 import { ConfigModule } from '@nestjs/config';
-import { DbcontrollModule } from './dbcontroll/dbcontroll.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmConfigService } from 'config/typeorm.config';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    EmailVerifyModule,
-    DbcontrollModule,
+    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    emailVerifyModule,
   ],
   controllers: [],
   providers: [],

@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { verfiyDTO } from 'src/email-verify/dto/email-verify.dto';
-import { Verify } from 'src/email-verify/entitiy/email-verify.entity';
+import { verify } from 'src/email-verify/entitiy/email-verify.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class verifyDB {
+export class dbcontrollService {
   constructor(
-    @InjectRepository(Verify) private readonly Repo: Repository<Verify>,
+    @InjectRepository(verify)
+    private readonly Repo: Repository<verify>,
   ) {}
 
   async create(dto: verfiyDTO) {

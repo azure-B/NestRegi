@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { Verify } from 'src/email-verify/entitiy/email-verify.entity';
+import { verify } from 'src/email-verify/entitiy/email-verify.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -15,7 +15,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('DATABASE_USERNAME'),
       password: this.configService.get<string>('DATABASE_PASSWORD'),
       database: 'PRACTICE',
-      entities: [Verify],
+      entities: [verify],
       synchronize: false,
     };
   }

@@ -1,9 +1,9 @@
 import { Body, Controller, Get } from '@nestjs/common';
-import { EmailVerifyService } from './email-verify.service';
+import { emailVerifyService } from './email-verify.service';
 
 @Controller('email-verify')
-export class EmailVerifyController {
-  constructor(private readonly EmailService: EmailVerifyService) {}
+export class emailVerifyController {
+  constructor(private readonly EmailService: emailVerifyService) {}
 
   @Get()
   SendMail(@Body() { email }: { email: string }) {

@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { verifyDB } from './verify.dbcontroll.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from 'config/typeorm.config';
+import { verify } from 'src/email-verify/entitiy/email-verify.entity';
+import { dbcontrollService } from './dbcontroll.service';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService })],
-  providers: [verifyDB],
+  imports: [TypeOrmModule.forFeature([verify])],
+  providers: [dbcontrollService],
+  exports: [dbcontrollService],
 })
-export class DbcontrollModule {}
+export class dbcontrollModule {}
