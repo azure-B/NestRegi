@@ -16,8 +16,8 @@ export class dbcontrollService {
     return await this.Repo.save(create);
   }
 
-  findOne(userId: string) {
-    return this.Repo.find({ where: { userId } });
+  async findOne(userId: string) {
+    return await this.Repo.findOne({ where: { userId } });
   }
 
   async update(dto: verfiyDTO) {

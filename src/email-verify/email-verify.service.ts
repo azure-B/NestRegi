@@ -27,8 +27,8 @@ export class emailVerifyService {
         subject: '인증메일입니다. ✔', // Subject line
         text: `인증번호 : ${key}`, // plaintext body
       })
-      .then((success) => {
-        console.log(success);
+      .then(() => {
+        console.log('succes mail');
         this.saveKey(Save);
       })
       .catch((err) => {
@@ -37,7 +37,8 @@ export class emailVerifyService {
   }
 
   async saveKey(data: verfiyDTO) {
-    if (this.DB.findOne(data.userId)) {
+    const findone = await this.DB.findOne(data.userId);
+    if (findone) {
       this.DB.update(data);
     } else {
       this.DB.create(data);
