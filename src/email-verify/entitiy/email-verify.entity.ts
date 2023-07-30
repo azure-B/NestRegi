@@ -8,6 +8,6 @@ export class verify {
   @Column({ length: 65, nullable: false })
   userId: string;
 
-  @Column({ length: 7, nullable: false })
+  @Column({ nullable: false })
   key: number;
 }

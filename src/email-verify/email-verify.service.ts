@@ -22,7 +22,6 @@ export class emailVerifyService {
       this.DB.create(data);
       result = true;
     }
-
     return result;
   }
 
